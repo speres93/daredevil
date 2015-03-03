@@ -1,0 +1,84 @@
+<html>
+  <head>
+    <title>Daredevil</title>
+  </head>
+  <body>
+    <script src="src/daredevil.js"></script>
+    <script>
+      var daredevil = new Daredevil();
+
+      var actionMaisSobre = {
+        regexp: '[.*]?mais sobre.*',
+        callback: function(text){
+          var content = text.replace(/[.*]?mais sobre/i, '').trim();
+          var url = '';
+          if(content == 'dilma'){
+            url = 'http://g1.globo.com/topico/dilma';
+          } else if (content == 'neymar') {
+            url = 'http://globoesporte.globo.com/atleta/neymar.html';
+          }
+
+          window.location.href = url
+        }
+      }
+
+      var actionIrParaSecao = {
+        regexp: '[.*]?ir para.*',
+        callback: function(text){
+          var content = text.replace(/[.*]?ir para/i, '').trim();
+          var url = '';
+
+          if(content == 'jornal nacional'){
+            url = 'http://g1.globo.com/jornal-nacional/index.html';
+          } else if (content == 'sportv') {
+            url = 'http://sportv.globo.com/';
+          }
+
+          window.location.href = url
+        }
+      }
+
+      var actionBuscarPor = {
+        regexp: '[.*]?buscar por.*',
+        callback: function(text){
+          var content = text.replace(/[.*]?buscar por/i, '').trim();
+          content = content.replace(' ', '-');
+          var url = 'http://www.globo.com/busca/?q=' + content;
+
+          window.location.href = url
+        }
+      }
+
+      daredevil.addActions(actionMaisSobre);
+      daredevil.addActions(actionIrParaSecao);
+      daredevil.addActions(actionBuscarPor);
+    </script>
+
+    <style media="screen">
+      body {
+        background-color: lightgray;
+      }
+
+      div {
+        width: 150px;
+        height: 150px;
+        background-color: white;
+        border-radius: 50%;
+        margin: 250px 0 0 45%;
+      }
+
+      div p {
+        width: 150px;
+        height: 150px;
+        background-image: url(mic.gif);
+        background-repeat: no-repeat;
+        background-size: 100% auto;
+        margin: -5px 0 0 -2px;
+      }
+    </style>
+
+    <div onclick="daredevil.start()">
+      <p onclick="daredevil.start()"></a>
+    </div>
+  </body>
+</html>
