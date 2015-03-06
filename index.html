@@ -1,5 +1,8 @@
+<!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
     <title>Daredevil</title>
   </head>
   <body>
@@ -52,6 +55,8 @@
       daredevil.addActions(actionMaisSobre);
       daredevil.addActions(actionIrParaSecao);
       daredevil.addActions(actionBuscarPor);
+
+      daredevil.start();
     </script>
 
     <style media="screen">
@@ -80,5 +85,12 @@
     <div onclick="daredevil.start()">
       <p onclick="daredevil.start()"></a>
     </div>
+    <p>Olá, se você estiver vendo essa pagina em HTTPS basta apenas dizer:
+      <ul>
+        <li><code>buscar por ...</code> irá realizar uma busca na globo.com</li>
+        <li><code>ir para ...</code> irá para uma seção globo.com</li>
+        <li><code>mais sobre ...</code> irá uma página especial sobre uma personalidade na globo.com</li>
+      </ul>
+    </p>
   </body>
 </html>

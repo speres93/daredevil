@@ -12,6 +12,11 @@ function Daredevil(){
       index = e.results.length - 1;
       text = e.results[index][0].transcript;
       that.checkActions(text);
+      console.log(text);
+    };
+
+    speech.onend = function() {
+        this.start();
     };
   }
 
