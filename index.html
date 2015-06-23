@@ -8,55 +8,10 @@
   <body>
     <script src="src/daredevil.js"></script>
     <script>
-      var daredevil = new Daredevil();
-
-      var actionMaisSobre = {
-        regexp: '[.*]?mais sobre.*',
-        callback: function(text){
-          var content = text.replace(/[.*]?mais sobre/i, '').trim();
-          var url = '';
-          if(content == 'dilma'){
-            url = 'http://g1.globo.com/topico/dilma';
-          } else if (content == 'neymar') {
-            url = 'http://globoesporte.globo.com/atleta/neymar.html';
-          }
-
-          window.location.href = url
-        }
+      var start = function(text){
+        console.log(text);
       }
-
-      var actionIrParaSecao = {
-        regexp: '[.*]?ir para.*',
-        callback: function(text){
-          var content = text.replace(/[.*]?ir para/i, '').trim();
-          var url = '';
-
-          if(content == 'jornal nacional'){
-            url = 'http://g1.globo.com/jornal-nacional/index.html';
-          } else if (content == 'sportv') {
-            url = 'http://sportv.globo.com/';
-          }
-
-          window.location.href = url
-        }
-      }
-
-      var actionBuscarPor = {
-        regexp: '[.*]?buscar por.*',
-        callback: function(text){
-          var content = text.replace(/[.*]?buscar por/i, '').trim();
-          content = content.replace(' ', '-');
-          var url = 'http://www.globo.com/busca/?q=' + content;
-
-          window.location.href = url
-        }
-      }
-
-      daredevil.addActions(actionMaisSobre);
-      daredevil.addActions(actionIrParaSecao);
-      daredevil.addActions(actionBuscarPor);
-
-      daredevil.start();
+      var daredevil = new Daredevil(start);
     </script>
 
     <style media="screen">
@@ -85,12 +40,12 @@
     <div onclick="daredevil.start()">
       <p onclick="daredevil.start()"></a>
     </div>
-    <p>Olá, se você estiver vendo essa pagina em HTTPS basta apenas dizer:
+    <!-- <p>Olá, se você estiver vendo essa pagina em HTTPS basta apenas dizer:
       <ul>
         <li><code>buscar por ...</code> irá realizar uma busca na globo.com</li>
         <li><code>ir para ...</code> irá para uma seção globo.com</li>
         <li><code>mais sobre ...</code> irá uma página especial sobre uma personalidade na globo.com</li>
       </ul>
-    </p>
+    </p> -->
   </body>
 </html>

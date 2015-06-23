@@ -1,9 +1,20 @@
-function Daredevil(){
-  var speech = new webkitSpeechRecognition();
-  var that = this;
+function Daredevil(_callback){
+  this.start = function(){};
+  var Speech = window.SpeechRecognition ||
+               window.webkitSpeechRecognition ||
+               window.mozSpeechRecognition ||
+               window.msSpeechRecognition ||
+               window.oSpeechRecognition;
 
-  this.routes = [];
-  this.initialize = function(userOptions){
+  if(Speech === "undefined"){
+    //dont support speech
+    return
+  }
+
+  var speech = new Speech();
+  var callback = _callback;
+
+  var initialize = function(){
     speech.continuos = true;
     speech.interimResults = false;
     speech.lang = 'pt-BR';
@@ -11,43 +22,13 @@ function Daredevil(){
     speech.onresult = function(e){
       index = e.results.length - 1;
       text = e.results[index][0].transcript;
-      that.checkActions(text);
-      console.log(text);
-    };
-
-    speech.onend = function() {
-        this.start();
+      callback(text);
     };
   }
 
   this.start = function(){
     speech.start();
-  }
+  };
 
-  this.addActions = function(action){
-    var isActionExist = false;
-    if (action){
-      this.routes.forEach(function(element){
-        if (element['regexp'] == action['regexp']){
-          isActionExist = true;
-        }
-      });
-
-      if(!isActionExist){
-        this.routes.push(action);
-      }
-    }
-    return !isActionExist
-  }
-
-  this.checkActions = function(text){
-    this.routes.forEach(function(element){
-      var currentRegex = new RegExp(element['regexp'], 'i');
-      if(currentRegex.test(text)){
-        element['callback'](text);
-      }
-    });
-  }
-
-  this.initialize()
+  initialize();
 }
